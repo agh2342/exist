@@ -55,7 +55,7 @@
         <mac.dmg>${project.build.directory}/eXist-db-${project.version}.dmg</mac.dmg>
         <mac.codesign.identity>Developer ID Application: Evolved Binary Ltd</mac.codesign.identity>
         <mac.bundle.skip>false</mac.bundle.skip>
-        <mac.dmg.skip>false</mac.dmg.skip><!-- if false, MUST have [mac.bundle.skip="false"] -->
+        <mac.dmg.skip>true</mac.dmg.skip><!-- if false, MUST have [mac.bundle.skip="false"] -->
         <mac.codesign.skip>true</mac.codesign.skip><!-- if false, MUST have [mac.bundle.skip="false", mac.dmg.skip="false"] -->
     </properties>
 
