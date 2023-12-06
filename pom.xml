@@ -74,7 +74,7 @@
         <profile>
             <id>installer</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-installer</module>
