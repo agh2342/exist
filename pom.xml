@@ -98,7 +98,7 @@
         <profile>
             <id>concurrency-stress-tests</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-core-jcstress</module>
