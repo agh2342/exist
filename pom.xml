@@ -108,7 +108,7 @@
         <profile>
             <id>micro-benchmarks</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-core-jmh</module>
