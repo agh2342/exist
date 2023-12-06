@@ -1036,7 +1036,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skipAssembly>false</skipAssembly>  <!-- Can be overridden by profile skip-build-dist-archives -->
+                    <skipAssembly>true</skipAssembly>  <!-- Can be overridden by profile build-dist-archives -->
                     <attach>false</attach>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <descriptors>
@@ -1106,14 +1106,14 @@
 
     <profiles>
         <profile>
-            <id>skip-build-dist-archives</id>
+            <id>build-dist-archives</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <configuration>
-                            <skipAssembly>true</skipAssembly>  <!-- Override setting in default profile build/plugins for this module -->
+                            <skipAssembly>false</skipAssembly>  <!-- Override setting in default profile build/plugins for this module -->
                         </configuration>
                     </plugin>
                 </plugins>
