@@ -74,7 +74,7 @@
         <profile>
             <id>installer</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-installer</module>
@@ -84,6 +84,7 @@
         <profile>
             <id>docker</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
                 <property>
                     <name>docker</name>
                     <value>true</value>
@@ -97,7 +98,7 @@
         <profile>
             <id>concurrency-stress-tests</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-core-jcstress</module>
@@ -107,7 +108,7 @@
         <profile>
             <id>micro-benchmarks</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>exist-core-jmh</module>

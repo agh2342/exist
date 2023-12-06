@@ -54,6 +54,9 @@
         <mac.bundle.java.dir>${mac.bundle.dir}/Contents/Java</mac.bundle.java.dir>
         <mac.dmg>${project.build.directory}/eXist-db-${project.version}.dmg</mac.dmg>
         <mac.codesign.identity>Developer ID Application: Evolved Binary Ltd</mac.codesign.identity>
+        <mac.bundle.skip>true</mac.bundle.skip>
+        <mac.dmg.skip>true</mac.dmg.skip><!-- if false, MUST have [mac.bundle.skip="false"] -->
+        <mac.codesign.skip>true</mac.codesign.skip><!-- if false, MUST have [mac.bundle.skip="false", mac.dmg.skip="false"] -->
     </properties>
 
     <dependencies>
@@ -428,6 +431,7 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <markersDirectory>${project.build.directory}/dependency-maven-plugin-markers/macbundle</markersDirectory>
                             <artifactItems>
                                 <artifactItem>
@@ -469,6 +473,7 @@
                             <goal>rename</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <sourceFile>${mac.bundle.resources.dir}/etc/org/exist/jetty/etc</sourceFile>
                             <destinationFile>${mac.bundle.resources.dir}/etc/jetty</destinationFile>
                             <ignoreFileNotFoundOnIncremental>true</ignoreFileNotFoundOnIncremental>
@@ -506,6 +511,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <fileSets>
                                 <fileSet>
                                     <sourceFile>${project.basedir}/../LICENSE</sourceFile>
@@ -584,6 +590,7 @@
                             <goal>transform</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <transformationSets>
                                 <transformationSet>
                                     <dir>${mac.bundle.resources.dir}/etc/jetty</dir>
@@ -607,6 +614,7 @@
                             <goal>transform</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <transformationSets>
                                 <transformationSet>
                                     <dir>${mac.bundle.resources.dir}/etc/webapp/WEB-INF</dir>
@@ -648,6 +656,7 @@
                             <goal>clean</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <excludeDefaultDirectories>true</excludeDefaultDirectories>
                             <filesets>
                                 <fileset>
@@ -746,6 +755,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <outputDirectory />  <!-- NOTE: this must be empty -->
                             <resources>
                                 <resource>
@@ -1026,7 +1036,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skipAssembly>false</skipAssembly>  <!-- Can be overridden by profile skip-build-dist-archives -->
+                    <skipAssembly>true</skipAssembly>  <!-- Can be overridden by profile build-dist-archives -->
                     <attach>false</attach>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <descriptors>
@@ -1048,6 +1058,7 @@
                             <goal>bundle</goal>
                         </goals>
                         <configuration>
+                            <skip>${mac.bundle.skip}</skip>
                             <displayName>eXist-db</displayName>
                             <identifier>org.exist.start.Main</identifier>
                             <mainClassName>org.exist.start.Main</mainClassName>
@@ -1095,14 +1106,14 @@
 
     <profiles>
         <profile>
-            <id>skip-build-dist-archives</id>
+            <id>build-dist-archives</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <configuration>
-                            <skipAssembly>true</skipAssembly>  <!-- Override setting in default profile build/plugins for this module -->
+                            <skipAssembly>false</skipAssembly>  <!-- Override setting in default profile build/plugins for this module -->
                         </configuration>
                     </plugin>
                 </plugins>
@@ -1136,6 +1147,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.codesign.skip}</skip>
                                     <useMavenLogger>true</useMavenLogger>
                                     <executable>${project.basedir}/src/main/scripts/codesign-jansi-mac.sh</executable>
                                     <arguments>
@@ -1153,6 +1165,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.codesign.skip}</skip>
                                     <executable>/usr/bin/codesign</executable>
                                     <arguments>
                                         <argument>--force</argument>
@@ -1198,6 +1211,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.dmg.skip}</skip>
                                     <executable>${project.basedir}/src/main/scripts/create-dmg-mac.sh</executable>
                                     <arguments>
                                         <argument>${mac.bundle.dir}</argument>
@@ -1242,6 +1256,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.dmg.skip}</skip>
                                     <executable>${project.basedir}/src/main/scripts/create-dmg-unix.sh</executable>
                                     <arguments>
                                         <argument>${mac.bundle.dir}</argument>
@@ -1284,6 +1299,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.codesign.skip}</skip>
                                     <executable>/usr/bin/codesign</executable>
                                     <arguments>
                                         <argument>--force</argument>
@@ -1300,6 +1316,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${mac.codesign.skip}</skip>
                                     <useMavenLogger>true</useMavenLogger>
                                     <executable>/usr/bin/xcrun</executable>
                                     <arguments>
